@@ -7,10 +7,13 @@ pipeline {
     }
     environment {
         CI = 'true'
+        appName="Multi-Branch"
+        teamName = 'FRONT-END'
     }
     stages {
         stage('Build') {
             steps {
+                slackSend(channel: "pipeline", message: "[${teamName}]${appName} - Job Started! :)", sendAsText: true)
                 sh 'npm install'
             }
         }
@@ -38,6 +41,14 @@ pipeline {
                 input message: 'Finished using the web site? (Click "Proceed" to continue)'
                 sh './jenkins/scripts/kill.sh'
             }
+        }
+    }
+    post {
+        success {
+            slackSend(channel: "pipeline", message: "[${teamName}]${appName} - Success! :)", sendAsText: true)
+        }
+        failure {
+            slackSend(channel: "pipeline",color: "danger", message: "[${teamName}]${appName} - Failed! :)", sendAsText: true)
         }
     }
 }
