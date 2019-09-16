@@ -48,7 +48,7 @@ pipeline {
             slackSend(channel: "pipeline", message: "[${teamName}]${appName} - Success! :)", sendAsText: true)
         }
         failure {
-            slackSend(channel: "pipeline",color: "danger", message: "[${teamName}]${appName} - Failed! :)", sendAsText: true)
+            slackSend(channel: "pipeline",color: "danger", message: "[${teamName}]${appName} - Failed! *${env.BRANCH_NAME}* :(", sendAsText: true)
         }
     }
 }
