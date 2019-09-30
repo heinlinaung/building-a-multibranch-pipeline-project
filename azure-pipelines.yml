@@ -22,5 +22,5 @@ steps:
     npm run build
   displayName: 'npm install and build'
 
-- script: 'sh ./deploy.sh $(Build.SourceBranch)'
+- script: 'sh ./deploy.sh $(Build.SourceBranchName)'
   displayName: '[Run] Tasks based on branch argument' 
