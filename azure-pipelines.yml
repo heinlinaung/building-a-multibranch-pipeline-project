@@ -22,17 +22,5 @@ steps:
     npm run build
   displayName: 'npm install and build'
 
-- script: 'echo $(Build.SourceBranchName)'
-  displayName: 'echo SourceBranchName'
-
-- script: 'echo "on Master branch "'
-  displayName: '[Run]Master Branch'
-  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
-
-- script: 'echo "on Development branch "'
-  displayName: '[Run]Development Branch'
-  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/development'))
-
-- script: 'echo "on Production branch "'
-  displayName: '[Run]Production Branch'
-  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/production'))
+- script: 'sh ./deploy.sh $(Build.SourceBranch)'
+  displayName: '[Run] Tasks based on branch argument' 
